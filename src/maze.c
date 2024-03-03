@@ -1,6 +1,7 @@
 #include "maze.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 void readMazeFromFile(const char *filename, Maze *maze) {
     FILE *file = fopen(filename, "r");
@@ -9,33 +10,65 @@ void readMazeFromFile(const char *filename, Maze *maze) {
         exit(EXIT_FAILURE);
     }
 
+    assert (1 == 1);
+
     char ch;
-    maze->width = 0;
-    maze->height = 0;
+
+    int current_x = 0;
+    int current_y = 0;
+    
+    int P_set = 0;
+    int K_set = 0;
+
+    int height = 0;
+    int width = 0;
 
     while (fscanf(file, "%c", &ch) != EOF) {
-        if (ch == '\n') {
-            if (maze->width == 0) {
-                maze->width = maze->height; // Assuming square maze if width not set
-            }
-            maze->height++;
-        } else {
-            int x = maze->height;
-            int y = maze->width;
 
-            maze->grid[x][y] = ch;
+        // Check for illegal characters, only X, space, P, K, \n acceptable
+        if (ch != 'X' && ch != ' ' && ch != 'K' && ch != 'P' && ch != '\n' ){
+            fprintf(stderr, "Found illegal character while parsing: %c\n", ch);
+            exit(EXIT_FAILURE);
+        }
+
+
+        else if (ch == '\n') {
+            current_x = 0;
+            current_y ++ ;
+            height++;
+        } else {
+
+            maze->grid[current_x][current_y] = ch;
 
             if (ch == 'P') {
-                maze->startX = y;
-                maze->startY = x;
+                maze->startX = current_x;
+                maze->startY = current_y;
+                P_set = 1;
             } else if (ch == 'K') {
-                maze->endX = y;
-                maze->endY = x;
+                maze->endX = current_x;
+                maze->endY = current_y;
+                K_set = 1;
             }
 
-            maze->width++;
+            if ( current_y == 0 ){
+                width ++;
+            }
+
+            current_x ++;
         }
     }
 
     fclose(file);
+
+    if ( P_set == 0 || K_set == 0 ){
+        fprintf(stderr, "Haven't found a starting or an ending point\n");
+        exit(EXIT_FAILURE);
+    }
+
+    assert (height > 2);
+    assert (width > 2);
+    maze->height = height;
+    maze->width = width;
+    // return error if there is not starting point or exit
+
 }

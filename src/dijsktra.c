@@ -4,9 +4,13 @@
 #include <stdio.h>
 
 void dijkstra(int startX, int startY, int endX, int endY, char maze[MAX_SIZE][MAX_SIZE], int width, int height) {
+
+    printf("NO SIEMA");
     int distances[MAX_SIZE][MAX_SIZE];
     bool visited[MAX_SIZE][MAX_SIZE];
     int prev[MAX_SIZE * MAX_SIZE][2];
+
+
 
     // Initialize distances, visited, and previous node arrays
     for (int i = 0; i < height; ++i) {
