@@ -16,5 +16,6 @@ typedef struct {
 
 // Function prototypes
 void readMazeFromFile(const char *filename, Maze *maze);
+void printMaze( Maze *maze );
 
 #endif // MAZE_H

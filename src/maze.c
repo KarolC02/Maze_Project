@@ -3,6 +3,19 @@
 #include <stdlib.h>
 #include <assert.h>
 
+void printMaze( Maze *maze ){
+    if ( maze == NULL ){
+        fprintf(stderr, "Error loading the maze");
+        exit(EXIT_FAILURE);
+    }
+    for( int i = 0; i < maze->height; i++ ){
+        for( int j = 0; j < maze->width; j++ ){
+            printf("%c", maze->grid[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
 void readMazeFromFile(const char *filename, Maze *maze) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -31,14 +44,12 @@ void readMazeFromFile(const char *filename, Maze *maze) {
             exit(EXIT_FAILURE);
         }
 
-
         else if (ch == '\n') {
             current_x = 0;
             current_y ++ ;
             height++;
         } else {
-
-            maze->grid[current_x][current_y] = ch;
+            maze->grid[current_y][current_x] = ch;
 
             if (ch == 'P') {
                 maze->startX = current_x;

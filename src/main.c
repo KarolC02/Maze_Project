@@ -11,11 +11,8 @@ int main(int argc, char **argv) {
 
     Maze maze;
     readMazeFromFile(argv[1], &maze);
-
-    printf("The width is %d\n", maze.width);
-    printf("The height is %d\n", maze.height);
-    return 1;
-    dijkstra(maze.startX, maze.startY, maze.endX, maze.endY, maze.grid, maze.width, maze.height);
-
+    printMaze(&maze);
+    dijkstra2(&maze);
+    printMaze(&maze);
     return EXIT_SUCCESS;
 }
