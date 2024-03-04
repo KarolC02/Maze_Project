@@ -52,10 +52,10 @@ void dijkstra2(Maze *maze){
     distances[maze->startX][maze->startY] = 0;
     insert(&heap, (Node){maze->startX, maze->startY, 0});
     
-    printf("THe size of the heap is now %d\n", heap.size);
+    printf("The size of the heap is now %d\n", heap.size);
     while (heap.size > 0) {
         Node current = Poll(&heap);
-        printf("THe size of the heap is now %d\n", heap.size);
+        printf("The size of the heap is now %d\n", heap.size);
         printf("Aktualnie jestem na (%d,%d)\n", current.y, current.x);
 
         if (visited[current.y][current.x]) {

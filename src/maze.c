@@ -40,7 +40,7 @@ void readMazeFromFile(const char *filename, Maze *maze) {
 
         // Check for illegal characters, only X, space, P, K, \n acceptable
         if (ch != 'X' && ch != ' ' && ch != 'K' && ch != 'P' && ch != '\n' ){
-            fprintf(stderr, "Found illegal character while parsing: %c\n", ch);
+            fprintf(stderr, "Found illegal character while parsing: %d\n", ch);
             exit(EXIT_FAILURE);
         }
 
