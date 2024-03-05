@@ -13,7 +13,8 @@ int main(int argc, char **argv) {
     readMazeFromFile(argv[1], &maze);
     printMaze(&maze);
     //dijkstra2(&maze);
-    randomPath(&maze);
+    //randomPath(&maze);
+    BFS(&maze);
 
     printMaze(&maze);
     return EXIT_SUCCESS;
