@@ -107,14 +107,6 @@ void readMazeFromFile(const char *filename, Maze *maze) {
                 maze->visited[i][j] = false;
         }
     }
-    // for( int i = 0; i < maze->height; i++ ){
-    //     for( int j = 0; j <maze->width; j++ ){
-    //         printf("(%d,%d)", i,j);
-    //     }
-    //     if( i == maze->height-1){
-    //         printf("\n");
-    //     }
-    // }
 
     if ( P_set == 0 || K_set == 0 ){
         fprintf(stderr, "Haven't found a starting or an ending point\n");

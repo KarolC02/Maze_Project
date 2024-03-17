@@ -21,9 +21,9 @@ void initQueue(Queue *q);
 bool isEmpty(Queue *q);
 void enqueue(Queue *q, Cell item);
 Cell dequeue(Queue *q);
-void markPath(Maze *maze, int currentX, int currentY, Cell **prev);
 bool isValidCell(char maze[][MAX_SIZE], int x, int y);
 void DFS(Maze *maze);
-void printPrev(Cell *prev, int width, int height);
+void markPath(Maze *maze);
+void printPrev(Maze *maze);
 
 #endif //DFS_H

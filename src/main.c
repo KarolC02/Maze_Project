@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
     // dijkstra(&maze);
     // randomPath(&maze);
     // BFS(&maze);
+    printf("NO SIEMA\n");
     DFS(&maze);
 
     printMaze(&maze);
