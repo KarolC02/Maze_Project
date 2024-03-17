@@ -52,10 +52,12 @@ void readMazeFromFile(const char *filename, Maze *maze) {
             maze->grid[current_y][current_x] = ch;
 
             if (ch == 'P') {
+                printf("Found P at (%d, %d)\n", current_y, current_x);
                 maze->startX = current_x;
                 maze->startY = current_y;
                 P_set = 1;
             } else if (ch == 'K') {
+                printf("Found K at (%d, %d)\n", current_y, current_x);
                 maze->endX = current_x;
                 maze->endY = current_y;
                 K_set = 1;
@@ -64,7 +66,7 @@ void readMazeFromFile(const char *filename, Maze *maze) {
             if ( current_y == 0 ){
                 width ++;
             }
-
+            
             current_x ++;
         }
     }

@@ -6,6 +6,8 @@
 // The maze structure
 typedef struct {
     char grid[MAX_SIZE][MAX_SIZE];
+    int **prevX;
+    int **prevY;
     int width;
     int height;
     int startX;

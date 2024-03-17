@@ -3,13 +3,14 @@
 
 #include "heap.h"
 #include "maze.h"
+#include <stdbool.h>
 
 // Structure to represent a cell in the maze
 typedef struct {
     int x, y; // Coordinates of the cell
 } Cell;
 
-// Structure to represent a queue for BFS
+// Structure to represent a queue for
 typedef struct {
     Cell items[MAX_SIZE];
     int front, rear;
@@ -22,7 +23,7 @@ void enqueue(Queue *q, Cell item);
 Cell dequeue(Queue *q);
 void markPath(Maze *maze, int currentX, int currentY, Cell **prev);
 bool isValidCell(char maze[][MAX_SIZE], int x, int y);
-void BFS(Maze *maze);
+void DFS(Maze *maze);
 void printPrev(Cell *prev, int width, int height);
 
 #endif //DFS_H
