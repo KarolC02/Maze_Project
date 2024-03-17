@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     printMaze(&maze);
     //dijkstra2(&maze);
     //randomPath(&maze);
-    //BFS(&maze);
+//    BFS(&maze);
     DFS(&maze);
 
     printMaze(&maze);

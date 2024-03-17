@@ -6,7 +6,7 @@
 #include <assert.h>
 
 
-#define MAX_SIZE 10240
+#define MAX_SIZE 102400
 
 // Structure to represent a cell in the maze
 typedef struct {
