@@ -1,6 +1,10 @@
 #include "maze.h"
 #include "dijsktra.h"
+#include "RightHandRule.h"
 #include "DFS.h"
+#include "BFS.h"
+#include "BellmanFord.h"
+#include "AStar.h"
 #include <stdio.h>
 
 int main(int argc, char **argv) {
@@ -18,8 +22,10 @@ int main(int argc, char **argv) {
     // dijkstra(&maze);
     // randomPath(&maze);
     // BFS(&maze);
-    printf("NO SIEMA\n");
-    DFS(&maze);
+    // DFS(&maze);
+    // AStar(&maze);
+    rightHandRule(&maze);
+    // bellmanFord(&maze);
 
     printMaze(&maze);
     return EXIT_SUCCESS;

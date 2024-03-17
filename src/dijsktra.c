@@ -1,4 +1,5 @@
 #include "dijsktra.h"
+#include "graph_utils.h"
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -35,7 +36,7 @@ void dijkstra(Maze *maze){
     MinHeap heap;
     initHeap(&heap, MAX_SIZE * MAX_SIZE);
     distances[maze->startX][maze->startY] = 0;
-    insert(&heap, (Node){maze->startX, maze->startY, 0});
+    insert(&heap, (Node){maze->startX, maze->startY, 0, 0});
     
     // printf("The size of the heap is now %d\n", heap.size)
     while (heap.size > 0) {
@@ -74,41 +75,15 @@ void dijkstra(Maze *maze){
                     maze->prevX[ny][nx] = current.x;
                     maze->prevY[ny][nx] = current.y;
                     // printf("PREV OF (%d,%d) is (%d,%d)\n", ny, nx, prevY[ny][nx], prevX[ny][nx]);
-                    insert(&heap, (Node){nx, ny, newDist});
+                    insert(&heap, (Node){nx, ny, newDist, newDist});
                     // printf("Just inserted a node! The size of the heap is now %d\n", heap.size);
                 }
             }
         }
     }
 
-    reconstruct_path(maze->endX, maze->endY, maze);
+    markPath(maze);
     freeHeap(&heap);
 
 
-}
-
-void reconstruct_path(int currentX, int currentY, Maze *maze) {
-    // Check if there K was found
-    if ( maze->prevX[maze->endY][maze->endX] == -1 || maze->prevY[maze->endY][maze->endX] == -1 ){
-        printf("Path was not found\n");
-        return;
-    }
-    // Starting from the end node, we will go back through the previous nodes to find the path
-    while (currentX != -1 && currentY != -1) {
-        if (maze->grid[currentY][currentX] != 'K' && maze->grid[currentY][currentX] != 'P'){
-            maze->grid[currentY][currentX] = '*'; // Mark the path
-        }
-        // printf("curently at (%d,%d)\n", currentY, currentX);
-        int tempX = maze->prevX[currentY][currentX];
-        int tempY = maze->prevY[currentY][currentX];
-        // printf("I wanna go to (%d,%d)\n", tempY, tempX);
-        if( maze->grid[tempY][tempX] == 'P'){
-            break;
-        }
-        assert (tempX >= 0);
-        assert (tempY >= 0);
-        currentX = tempX;
-        currentY = tempY;
-        // printf("Now at (%d,%d)\n", currentY, currentX);
-    }
 }

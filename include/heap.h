@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 typedef struct {
-    int x, y, distance;
+    int x, y, distance, f;
 } Node;
 
 typedef struct {

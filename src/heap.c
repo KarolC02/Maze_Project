@@ -15,7 +15,7 @@ void initHeap(MinHeap* heap, int capacity) {
 }
 
 void heapUp(MinHeap* heap, int idx) {
-    while (idx != 0 && heap->nodes[(idx - 1) / 2].distance > heap->nodes[idx].distance) {
+    while (idx != 0 && heap->nodes[(idx - 1) / 2].f > heap->nodes[idx].f) {
         swap(&heap->nodes[(idx - 1) / 2], &heap->nodes[idx]);
         idx = (idx - 1) / 2;
     }
@@ -39,9 +39,9 @@ void heapDown(MinHeap* heap, int idx) {
     int left = 2 * idx + 1;
     int right = 2 * idx + 2;
 
-    if (left < heap->size && heap->nodes[left].distance < heap->nodes[smallest].distance)
+    if (left < heap->size && heap->nodes[left].f < heap->nodes[smallest].f)
         smallest = left;
-    if (right < heap->size && heap->nodes[right].distance < heap->nodes[smallest].distance)
+    if (right < heap->size && heap->nodes[right].f < heap->nodes[smallest].f)
         smallest = right;
 
     if (smallest != idx) {
@@ -53,7 +53,7 @@ void heapDown(MinHeap* heap, int idx) {
 Node Poll(MinHeap* heap) {
     if (heap->size <= 0) {
         printf("Heap is empty\n");
-        return (Node){-1, -1, -1}; // Return an error value or handle error appropriately
+        return (Node){-1, -1, -1, -1}; // Return an error value or handle error appropriately
     }
     
     Node root = heap->nodes[0];
@@ -64,15 +64,15 @@ Node Poll(MinHeap* heap) {
     return root;
 }
 
-void decreaseKey(MinHeap* heap, int x, int y, int distance) {
+void decreaseKey(MinHeap* heap, int x, int y, int f) {
     // This function assumes that the node to be decreased is already in the heap.
-    // It searches for the node, updates its distance, and then performs a heap up
+    // It searches for the node, updates its f, and then performs a heap up
     // to maintain the heap property. Depending on your application, you may want to
     // optimize this process, especially if you can track nodes' positions in the heap.
     int i;
     for (i = 0; i < heap->size; i++) {
         if (heap->nodes[i].x == x && heap->nodes[i].y == y) {
-            heap->nodes[i].distance = distance;
+            heap->nodes[i].f = f;
             break;
         }
     }

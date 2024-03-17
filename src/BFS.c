@@ -1,58 +1,48 @@
-// #include <limits.h>
-// #include <stdbool.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <assert.h>
+#include "BFS.h"
+#include "maze.h"
+#include <stdio.h>
 
-// // void BFS(void)
-// //     printf("HELLO WORLD\n");
-// // }
+void BFS(Maze *maze){
 
-// void BFS(Maze *maze){
+    Queue q;
+    initQueue(&q);
+    Cell start;
+    start.y = maze->startY;
+    start.x = maze->startX;
 
-//     Queue q;
-//     initQueue(&q);
-//     Cell prev[maze->height][maze->width];
+    enqueue(&q, start);
 
-//     Cell start = {1, 0};
+    // Arrays to represent possible movements (up, down, left, right)
+    int dx[] = {0, 0, -1, 1};
+    int dy[] = {-1, 1, 0, 0};
+    while (!isEmpty(&q) ) {
+        Cell current = dequeueFIFO(&q);
+        printf("jestem na (%d,%d)\n", current.y, current.x);
+        maze->visited[current.y][current.x] = true;
+        if (current.x == maze->endX && current.y == maze->endY) {
+            printPrev(maze);
+            markPath(maze);
+            printf("Path found!\n");
+            return; // Reached the destination
+        }
 
-//     int currentX = 0;
-//     int currentY = 0;
+        // Explore adjacent cells
+        for (int i = 0; i < 4; i++) {
+            int nx = current.x + dx[i];
+            int ny = current.y + dy[i];
+            if (isValidCell(maze, nx, ny) && !maze->visited[ny][nx]) {
+                printf("Dodaje do kolejki (%d, %d) \n", ny, nx);
+                enqueue(&q, (Cell){nx, ny});
+                maze->prevY[ny][nx] = current.y; // Store the previous cell for each cell in the path
+                maze->prevX[ny][nx] = current.x; // Store the previous cell for each cell in the path
+                printf("Prev (%d,%d) to (%d,%d) \n", ny, nx, current.y, current.x);
+            }
+        }
+        printf("WIUUM Prev (1,1) to (%d,%d) \n", maze->prevY[1][1], maze->prevX[1][1]);
 
-//     maze->visited[currentY][currentX] = true;
-//     enqueue(&q, start);
+    }
 
-//     // Arrays to represent possible movements (up, down, left, right)
-//     int dx[] = {0, 0, -1, 1};
-//     int dy[] = {-1, 1, 0, 0};
+    // If the end cell is unreachable
+    printf("Path not found\n");
 
-//     while (!isQueueEmpty(&q)) {
-//         Cell current = dequeueFIFO(&q);
-
-
-//         if (current.x == maze->endX && current.y == maze->endY) {
-//             printf("A tu byłem??\n");
-//             printPrev(prev, maze->width, maze->height);
-//             markPath(maze->grid, current.x, current.y, prev);
-//             printf("Path found!\n");
-//             return; // Reached the destination
-//         }
-
-//        // Explore adjacent cells
-//         for (int i = 0; i < 4; i++) {
-//             int nx = current.x + dx[i];
-//             int ny = current.y + dy[i];
-//             printf("NO WITAM1\n");
-//             if (isValidCell(maze, nx, ny) && !maze->visited[ny][nx]) {
-//                 printf("NO WITAM2\n");
-//                 maze->visited[ny][nx] = true;
-//                 enqueue(&q, (Cell){nx, ny});
-//                 prev[ny][nx] = current; // Store the previous cell for each cell in the path
-//            }
-//        }
-//        printf("A jestem na (%d,%d)\n\n", current.x, current.y);
-//    }
-
-//    // If the end cell is unreachable
-//    printf("Path not found\n");
-// }
+}

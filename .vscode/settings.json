@@ -1,7 +1,15 @@
 {
   "files.associations": {
     "stdbool.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "__split_buffer": "c",
+    "deque": "c",
+    "functional": "c",
+    "iterator": "c",
+    "locale": "c",
+    "string": "c",
+    "unordered_map": "c",
+    "vector": "c"
   },
   "makefile.makefilePath": "C:\\Users\\borko\\OneDrive - Politechnika Warszawska\\Study\\JIMP2\\maze_project\\Makefile",
   "C_Cpp_Runner.cCompilerPath": "gcc",
