@@ -7,7 +7,7 @@
 #define MAX_SIZE 1024
 
 // Function prototypes for Dijkstra's algorithm
-void dijkstra2(Maze *maze);
+void dijkstra(Maze *maze);
 void reconstruct_path(int currentX, int currentY, Maze *maze);
 
 #endif // DIJKSTRA_H
