@@ -1,11 +1,13 @@
 #ifndef MAZE_H
 #define MAZE_H
 
+#include <stdbool.h>
 #define MAX_SIZE 1024
 
 // The maze structure
 typedef struct {
     char grid[MAX_SIZE][MAX_SIZE];
+    bool **visited;
     int **prevX;
     int **prevY;
     int width;
