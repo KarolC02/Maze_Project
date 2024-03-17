@@ -12,12 +12,13 @@ int main(int argc, char **argv) {
 
 
     Maze maze;
+
     readMazeFromFile(argv[1], &maze);
     // printMaze(&maze);
-    dijkstra2(&maze);
+    // dijkstra(&maze);
     // randomPath(&maze);
     // BFS(&maze);
-    // DFS(&maze);
+    DFS(&maze);
 
     printMaze(&maze);
     return EXIT_SUCCESS;

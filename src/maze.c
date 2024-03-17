@@ -22,7 +22,6 @@ void readMazeFromFile(const char *filename, Maze *maze) {
         perror("Error opening file");
         exit(EXIT_FAILURE);
     }
-
     assert (1 == 1);
 
     char ch;
@@ -70,18 +69,57 @@ void readMazeFromFile(const char *filename, Maze *maze) {
             current_x ++;
         }
     }
+    assert (height > 2);
+    assert (width > 2);
+    maze->height = height;
+    maze->width = width;
+    maze->prevX = (int **)malloc(maze->height * sizeof(int *));
+    maze->prevY = (int **)malloc(maze->height * sizeof(int *));
+    maze->visited = (bool **)malloc(maze->height * sizeof(bool *));
+    assert (maze->prevX != NULL );
+    assert (maze->prevY != NULL );
+    assert (maze->visited != NULL) ;
 
-    fclose(file);
+    if (maze->prevX == NULL || maze->prevY == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < maze->height; ++i) {
+        maze->prevX[i] = (int *)malloc(maze->width * sizeof(int));
+        maze->prevY[i] = (int *)malloc(maze->width * sizeof(int));
+        maze->visited[i] = (bool *)malloc(maze->height * sizeof(bool));
+        assert (maze->prevX[i] != NULL );
+        assert (maze->prevY[i] != NULL );
+        assert (maze->visited[i] != NULL) ;
+
+        if (maze->prevX[i] == NULL || maze->prevY[i] == NULL ) {
+            fprintf(stderr, "Memory allocation failed\n");
+            exit(EXIT_FAILURE);
+        }
+
+        for(int j = 0; j < maze->width; j++ ){
+            maze->prevX[i][j] = -1;
+            maze->prevY[i][j] = -1;
+            if(maze->grid[i][j] == 'X')
+                maze->visited[i][j] = true;
+            else
+                maze->visited[i][j] = false;
+        }
+    }
+    // for( int i = 0; i < maze->height; i++ ){
+    //     for( int j = 0; j <maze->width; j++ ){
+    //         printf("(%d,%d)", i,j);
+    //     }
+    //     if( i == maze->height-1){
+    //         printf("\n");
+    //     }
+    // }
 
     if ( P_set == 0 || K_set == 0 ){
         fprintf(stderr, "Haven't found a starting or an ending point\n");
         exit(EXIT_FAILURE);
     }
-
-    assert (height > 2);
-    assert (width > 2);
-    maze->height = height;
-    maze->width = width;
     // return error if there is not starting point or exit
 
 }
