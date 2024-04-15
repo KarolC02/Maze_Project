@@ -128,7 +128,6 @@ void markPath( Maze *maze ){
     int tempX;
     int tempY;
     while( currentX != -1 && currentY != -1 ){
-        printf("CURRENTLY ON (%d, %d)\n", currentY, currentX);
         assert( currentX >= 0 );
         assert( currentY >= 0 );
         maze->grid[currentY][currentX] = '*';

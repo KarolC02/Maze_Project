@@ -19,14 +19,14 @@ int main(int argc, char **argv) {
 
     readMazeFromFile(argv[1], &maze);
     // printMaze(&maze);
-    // dijkstra(&maze);
+    dijsktra(&maze);
     // randomPath(&maze);
     // BFS(&maze);
     // DFS(&maze);
     // AStar(&maze);
-    rightHandRule(&maze);
+    // rightHandRule(&maze);
     // bellmanFord(&maze);
 
-    printMaze(&maze);
+    // printMaze(&maze);
     return EXIT_SUCCESS;
 }
